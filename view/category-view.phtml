@@ -1,0 +1,20 @@
+<?php
+/**
+ * YAWIK Landingpages
+ *
+ * @author Mathias Gelhausen <gelhausen@cross-solution.de>
+ * @filesource
+ * @copyright 2019 Cross Solution <https://www.cross-solution.de>
+ * @license MIT
+ */
+
+declare(strict_types=1);
+
+
+$this->headTitle(sprintf($this->translate('Landingpage %s'), $category->getName()));
+/** @var \Landingpages\Entity\Category $category */
+?>
+
+<h1><?=$category->getName()?></h1>
+
+<?=$this->landingpages($category)?>

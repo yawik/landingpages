@@ -1,0 +1,56 @@
+<?php
+/**
+ * YAWIK Landingpages
+ *
+ * @author Mathias Gelhausen <gelhausen@cross-solution.de>
+ * @filesource
+ * @copyright 2019 Cross Solution <https://www.cross-solution.de>
+ * @license MIT
+ */
+
+declare(strict_types=1);
+
+namespace Landingpages\Settings;
+
+$route = '/jobs/%slug%';
+
+$landingpages = [
+    /*
+
+    'text' => 'Finde Jobs',
+    'items' => [
+        'B' => [
+            'items' => [
+                'best-jobs' => [
+                    'text' => 'Best JOBS',
+                    'items' => [
+                        'slug' => [
+                            'text' => 'Best jobs in the world',
+                            'query' => [
+                                'q' => ,
+                                'd' => ,
+                                'l' => ,
+                            ],
+                            'params' => [
+
+                            ],
+                        ]
+                    ],
+                ],
+            ],
+        ],
+    ],
+
+     */
+
+]
+
+/* DO NOT EDIT BELOW THIS */
+return [
+    'router' => ['routes' => ['lang' => ['child_routes' => ['landingpage' => ['options' => [
+        'route' => str_replace('%slug%', '(?<slug>[\w_-]+)', preg_quote($route)),
+        'spec' => $route,
+    ]]]]]],
+
+    'options' => [Landingpages::class => ['options' => $landingpages]],
+];

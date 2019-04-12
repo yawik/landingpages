@@ -1,0 +1,34 @@
+<?php
+/**
+ * YAWIK Landingpages
+ *
+ * @author Mathias Gelhausen <gelhausen@cross-solution.de>
+ * @filesource
+ * @copyright 2019 Cross Solution <https://www.cross-solution.de>
+ * @license MIT
+ */
+
+ /* Provided variables:
+  * - $landingpages : Options\LandingpagesOptions
+  * - $slug         : string|null
+  */
+
+declare(strict_types=1);
+
+?>
+
+<?php if ($children = $category->getCategories()):?>
+<ul class="list-inline">
+    <?php foreach ($children as $child): ?>
+    <li><a class="btn btn-default" href="<?=$this->url('lang/landingpage-category', ['slug' => $child->getSlug()], true)?>"><?=$child->getName()?></a></li>
+    <?php endforeach ?>
+</ul>
+<?php endif ?>
+
+<?php if ($pages = $category->getLandingpages()): ?>
+<ul class="list-inline">
+    <?php foreach ($pages as $page): ?>
+    <li><a class="btn btn-default" href="<?=$this->url('lang/landingpage', ['slug' => $page->getSlug()], true)?>"><?=$page->getName()?></a></li>
+    <?php endforeach ?>
+</ul>
+<?php endif ?>
