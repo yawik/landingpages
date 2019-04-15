@@ -31,7 +31,7 @@
         "yawik/composer-plugin": "^1.0",
 	"yawik/auth": "^0.33",
 	"yawik/organizations": "^0.33",
-        "yawik/geo": "^0.33",
+        "yawik/geo": "^1.0",
         "yawik/applications": "^0.33",
         "yawik/cv": "^0.33",
         "yawik/settings": "^0.33"
