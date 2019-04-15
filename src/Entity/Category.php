@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Landingpages\Entity;
 
+use Landingpages\Options\LandingpagesOptions;
+
 /**
  *
  * @author Mathias Gelhausen <gelhausen@cross-solution.de>

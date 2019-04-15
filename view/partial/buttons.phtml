@@ -20,7 +20,7 @@ declare(strict_types=1);
 <?php if ($children = $category->getCategories()):?>
 <ul class="list-inline">
     <?php foreach ($children as $child): ?>
-    <li><a class="btn btn-default" href="<?=$this->url('lang/landingpage-category', ['slug' => $child->getSlug()], true)?>"><?=$child->getName()?></a></li>
+    <li><a class="btn btn-default" href="<?=$this->url('lang/landingpage', ['slug' => $child->getSlug()], true)?>"><?=$child->getName()?></a></li>
     <?php endforeach ?>
 </ul>
 <?php endif ?>

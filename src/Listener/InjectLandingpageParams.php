@@ -12,6 +12,10 @@ declare(strict_types=1);
 namespace Landingpages\Listener;
 
 use Core\EventManager\ListenerAggregateTrait;
+use Landingpages\Controller\CategoryController;
+
+use Landingpages\Entity\Category;
+
 use Landingpages\Options\LandingpagesOptions;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
@@ -59,11 +63,20 @@ class InjectLandingpageParams implements ListenerAggregateInterface
         }
 
         $this->setLazyDependencies();
-        $landingpage = $this->landingpagesOptions->getLandingpage($routeMatch->getParam('slug'));
+        $item = $this->landingpagesOptions->getItem($routeMatch->getParam('slug'));
 
-        $event->getRequest()->setQuery(new Parameters($landingpage->getQuery()));
-        $routeMatch->setParam('landingpage', $landingpage->getParams());
-        $this->viewHelper->setLandingpage($landingpage);
+        if ($item instanceof Category) {
+            $routeMatch->setParam('controller', CategoryController::class);
+            $routeMatch->setParam('action', 'index');
+
+            return;
+        }
+
+        $query = new Parameters($item->getQuery());
+        $query->set('clear', 1);
+        $event->getRequest()->setQuery($query);
+        $routeMatch->setParam('landingpage', $item->getParams());
+        $this->viewHelper->setLandingpage($item);
     }
 
     private function setLazyDependencies()

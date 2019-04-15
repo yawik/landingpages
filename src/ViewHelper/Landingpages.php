@@ -39,6 +39,10 @@ class Landingpages extends AbstractHelper
 
     public function __invoke($slug = null, $partial = 'landingpages/buttons', array $values = [])
     {
+        if (is_array($slug)) {
+            $slug = join('--', $slug);
+        }
+
         $category = $slug instanceof Category ? $slug : $this->landingpages->getCategory($slug);
         $values['category'] = $category;
 

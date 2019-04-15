@@ -12,35 +12,32 @@ declare(strict_types=1);
 
 namespace Landingpages\Settings;
 
-$route = '/jobs/%slug%';
+$route = '/landingpage/%slug%';
 
 $landingpages = [
     /*
 
-    'text' => 'Finde Jobs',
-    'items' => [
-        'B' => [
-            'items' => [
-                'best-jobs' => [
-                    'text' => 'Best JOBS',
-                    'items' => [
-                        'slug' => [
-                            'text' => 'Best jobs in the world',
-                            'query' => [
-                                'q' => ,
-                                'd' => ,
-                                'l' => ,
-                            ],
-                            'params' => [
-
-                            ],
-                        ]
+    'text' => title of the main category
+    'items' => [ // sub categories and landingpages
+        '<slug>' => [
+            'text' => title of sub category
+            'items' => [ // if 'items' key is present, this is a category.
+                '<slug>' => [
+                    'text' => title of landingpage,
+                        'query' => [
+                            'q' => search string,
+                            'd' => distance (must be int),
+                            'l' => location,
+                        ],
+                        'params' => [ // additional route params.
+                        ],
                     ],
                 ],
             ],
         ],
     ],
 
+    <slug>s must be unique!
      */
 
 ]
@@ -52,5 +49,5 @@ return [
         'spec' => $route,
     ]]]]]],
 
-    'options' => [Landingpages::class => ['options' => $landingpages]],
+    'options' => [LandingpagesOptions::class => ['options' => $landingpages]],
 ];

@@ -25,15 +25,4 @@ return ['router' => ['routes' => ['lang' => ['child_routes' => [
             ],
         ],
     ],
-    'landingpage-category' => [
-        'type' => 'Regex',
-        'options' => [
-            'regex' => '/landingpage-category(/?|/(?<slug>[\w_-]+))$',
-            'spec'  => '/landingpage-category/%slug%',
-            'defaults' => [
-                'controller' => Controller\CategoryController::class,
-                'action' => 'index',
-            ],
-        ],
-    ],
 ]]]]];
