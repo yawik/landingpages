@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace Landingpages\Settings;
+namespace Landingpages\Options;
 
 $route = '/landingpage/%slug%';
 
@@ -24,13 +24,12 @@ $landingpages = [
             'items' => [ // if 'items' key is present, this is a category.
                 '<slug>' => [
                     'text' => title of landingpage,
-                        'query' => [
-                            'q' => search string,
-                            'd' => distance (must be int),
-                            'l' => location,
-                        ],
-                        'params' => [ // additional route params.
-                        ],
+                    'query' => [
+                          'q' => search string,
+                          'd' => distance (must be int),
+                          'l' => location,
+                    ],
+                    'params' => [ // additional route params.
                     ],
                 ],
             ],
@@ -40,7 +39,7 @@ $landingpages = [
     <slug>s must be unique!
      */
 
-]
+];
 
 /* DO NOT EDIT BELOW THIS */
 return [

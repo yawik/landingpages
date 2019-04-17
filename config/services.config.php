@@ -28,9 +28,11 @@ return [
     'view_helpers' => [
         'factories' => [
             ViewHelper\Landingpages::class => ViewHelper\LandingpagesFactory::class,
+            ViewHelper\Landingpage::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
         ],
         'aliases' => [
             'landingpages' => ViewHelper\Landingpages::class,
+            'landingpage' => ViewHelper\Landingpage::class,
         ],
     ],
 
