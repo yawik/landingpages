@@ -26,7 +26,7 @@ class Landingpage extends AbstractHelper
      */
     private $landingpage;
 
-    public function __invoke(): ?\Landingpages\Entity\Landingpage
+    public function __invoke(): ?self
     {
         return $this->landingpage ? $this : null;
     }
