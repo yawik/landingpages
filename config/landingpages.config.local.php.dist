@@ -44,7 +44,7 @@ $landingpages = [
 /* DO NOT EDIT BELOW THIS */
 return [
     'router' => ['routes' => ['lang' => ['child_routes' => ['landingpage' => ['options' => [
-        'route' => str_replace('%slug%', '(?<slug>[\w_-]+)', preg_quote($route)),
+        'regex' => str_replace('%slug%', '(?<slug>[\w_-]+)', preg_quote($route)),
         'spec' => $route,
     ]]]]]],
 
