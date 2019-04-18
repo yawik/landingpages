@@ -19,10 +19,10 @@ $landingpages = [
 
     'text' => title of the main category
     'items' => [ // sub categories and landingpages
-        '<slug>' => [
+        <slug> => [
             'text' => title of sub category
             'items' => [ // if 'items' key is present, this is a category.
-                '<slug>' => [
+                <slug> => [
                     'text' => title of landingpage,
                     'query' => [
                           'q' => search string,
@@ -33,6 +33,11 @@ $landingpages = [
                     ],
                 ],
             ],
+        ],
+	<slug> => [
+            'combine' => [<slug>, ... ],
+            'glue' => Text used as delimiter between item names.
+            'text' => title of item when displayed in category view
         ],
     ],
 
