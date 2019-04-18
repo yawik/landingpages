@@ -58,7 +58,7 @@ class InjectLandingpageParams implements ListenerAggregateInterface
     {
         $routeMatch = $event->getRouteMatch();
 
-        if (!$routeMatch || 'lang/landingpage' !== $routeMatch->getMatchedRouteName()) {
+        if (!$routeMatch || 'lang/landingpages' !== $routeMatch->getMatchedRouteName()) {
             return;
         }
 

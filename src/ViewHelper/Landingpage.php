@@ -28,7 +28,7 @@ class Landingpage extends AbstractHelper
 
     public function __invoke(): ?\Landingpages\Entity\Landingpage
     {
-        return $this->landingpage;
+        return $this->landingpage ? $this : null;
     }
 
     /**
@@ -37,5 +37,19 @@ class Landingpage extends AbstractHelper
     public function setLandingpage($landingpage)
     {
         $this->landingpage = $landingpage;
+    }
+
+    public function isCombined()
+    {
+        return false !== strpos($this->landingpage->getSlug(), '--');
+    }
+
+    public function __call($method, $args)
+    {
+        $cb = [$this->landingpage, $method];
+
+        if (is_callable($cb)) {
+            return $cb(...$args);
+        }
     }
 }

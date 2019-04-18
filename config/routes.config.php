@@ -14,7 +14,7 @@ namespace Landingpages;
 
 return ['router' => ['routes' => ['lang' => ['child_routes' => [
 
-    'landingpage' => [
+    'landingpages' => [
         'type' => 'Regex',
         'options' => [
             'regex' => '/landingpage/(?<slug>[\w_-]+)',

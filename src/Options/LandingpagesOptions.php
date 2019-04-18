@@ -13,6 +13,7 @@ namespace Landingpages\Options;
 
 use Landingpages\Entity\Category;
 use Landingpages\Entity\Landingpage;
+use Landingpages\Entity\CombinedItem;
 
 use Zend\Stdlib\AbstractOptions;
 
@@ -39,7 +40,6 @@ class LandingpagesOptions extends AbstractOptions
         // Flatten array
         $landingpages = [];
         $categories = [];
-        $levels = [];
         $combine = [];
 
         if (!isset($options['items'])) {
@@ -55,16 +55,18 @@ class LandingpagesOptions extends AbstractOptions
             ];
         }
 
-        $flatten = function ($arr, $parent = null, $level = 0) use (&$landingpages, &$categories, &$levels, &$combine, &$flatten) {
+        $flatten = function ($arr, $parent = null, $level = 0) use (&$landingpages, &$categories, &$combine, &$flatten) {
             foreach ($arr as $slug => $spec) {
                 switch (true) {
                     case isset($spec['combine']):
+                        //phpcs:ignore
+                        $item = new CombinedItem($slug, $spec['text'] ?? null, function () use ($spec) { return $this->combine($spec['combine'], $spec); });
                         $combine[$slug] = $spec;
+                        $parent && $parent->addCombined($item);
                         break;
 
                     case isset($spec['items']):
                         $category = new Category($slug, $spec['text'] ?? $slug);
-                        $levels[$level][] = $category;
                         $categories[$slug] = $category;
 
                         $parent && $parent->addCategory($category);
@@ -133,6 +135,9 @@ class LandingpagesOptions extends AbstractOptions
                         'glue' => $this->combine[$slug]['glue'] ?? '+',
                     ]
                 );
+                if (isset($this->combine[$slug]['text'])) {
+                    $item->setName($this->combine[$slug]['text']);
+                }
                 break;
 
             default:

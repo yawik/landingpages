@@ -20,7 +20,7 @@ declare(strict_types=1);
 <?php if ($children = $category->getCategories()):?>
 <ul class="list-inline">
     <?php foreach ($children as $child): ?>
-    <li><a class="btn btn-default" href="<?=$this->url('lang/landingpage', ['slug' => $child->getSlug()], true)?>"><?=$child->getName()?></a></li>
+    <li><a class="btn btn-default" href="<?=$this->url('lang/landingpages', ['slug' => $child->getSlug()], true)?>"><?=$child->getName()?></a></li>
     <?php endforeach ?>
 </ul>
 <?php endif ?>
@@ -28,7 +28,15 @@ declare(strict_types=1);
 <?php if ($pages = $category->getLandingpages()): ?>
 <ul class="list-inline">
     <?php foreach ($pages as $page): ?>
-    <li><a class="btn btn-default" href="<?=$this->url('lang/landingpage', ['slug' => $page->getSlug()], true)?>"><?=$page->getName()?></a></li>
+    <li><a class="btn btn-default" href="<?=$this->url('lang/landingpages', ['slug' => $page->getSlug()], true)?>"><?=$page->getName()?></a></li>
+    <?php endforeach ?>
+</ul>
+<?php endif ?>
+
+<?php if ($items = $category->getCombined()): ?>
+<ul class="list-inline">
+    <?php foreach ($items as $item): ?>
+    <li><a class="btn btn-default" href="<?=$this->url('lang/landingpages', ['slug' => $item->getSlug()], true)?>"><?=$item->getName()?></a></li>
     <?php endforeach ?>
 </ul>
 <?php endif ?>

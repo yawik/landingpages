@@ -22,6 +22,7 @@ class Category extends AbstractItem
 {
     private $categories = [];
     private $landingpages = [];
+    private $combined = [];
     private $parent;
 
     public function addCategory(Category $category): void
@@ -33,6 +34,11 @@ class Category extends AbstractItem
     public function addLandingpage(Landingpage $page): void
     {
         $this->landingpages[$page->getSlug()] = $page;
+    }
+
+    public function addCombined(CombinedItem $item): void
+    {
+        $this->combined[$item->getSlug()] = $item;
     }
 
     /**
@@ -89,5 +95,21 @@ class Category extends AbstractItem
         }
 
         return $this->landingpages[$slug];
+    }
+
+    public function getCombined(?string $slug = null)
+    {
+        if (null === $slug) {
+            return $this->combined;
+        }
+
+        if (!isset($this->combined[$slug])) {
+            throw new \RuntimeException(sprintf(
+                'Combined item with slug "%s" not found.',
+                $slug
+            ));
+        }
+
+        return $this->combined[$slug];
     }
 }

@@ -12,9 +12,8 @@ declare(strict_types=1);
 namespace Landingpages;
 
 use Core\ModuleManager\ModuleConfigLoader;
-
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Mvc\MvcEvent;
 
 /**
