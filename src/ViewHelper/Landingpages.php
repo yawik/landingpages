@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace Landingpages\ViewHelper;
 
 use Landingpages\Entity\Category;
-
-use Zend\View\Helper\AbstractHelper;
+use Landingpages\Entity\Landingpage;
 use Landingpages\Options\LandingpagesOptions;
+use Zend\View\Helper\AbstractHelper;
 
 /**
  *
@@ -43,10 +43,19 @@ class Landingpages extends AbstractHelper
             $glue = $slug['glue'] ?? '+';
             unset($slug['glue']);
 
-            return $this->landingpages->combine($slug, ['glue' => $glue]);
+            $item = $this->landingpages->combine($slug, ['glue' => $glue]);
+
+            if ($item instanceof Landingpage) {
+                $category = new Category('__combined__');
+                $category->addLandingpage($item);
+            } else {
+                $category = $item;
+            }
+        } else {
+            /** @var Category|string $slug */
+            $category = $slug instanceof Category ? $slug : $this->landingpages->getCategory($slug);
         }
 
-        $category = $slug instanceof Category ? $slug : $this->landingpages->getCategory($slug);
         $values['category'] = $category;
 
         return $this->getView()->render($partial, $values);

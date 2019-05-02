@@ -12,9 +12,8 @@ declare(strict_types=1);
 namespace Landingpages\Options;
 
 use Landingpages\Entity\Category;
-use Landingpages\Entity\Landingpage;
 use Landingpages\Entity\CombinedItem;
-
+use Landingpages\Entity\Landingpage;
 use Zend\Stdlib\AbstractOptions;
 
 /**
@@ -167,6 +166,15 @@ class LandingpagesOptions extends AbstractOptions
         return;
     }
 
+    private function isAlreadyCombined($item1, $item2)
+    {
+        $slug1     = explode('--', $item1->getSlug());
+        $slug2     = explode('--', $item2->getSlug());
+        $intersect = array_intersect($slug1, $slug2);
+
+        return !empty($intersect);
+    }
+
     public function combine(array $combine, array $options = [])
     {
         $glue = ' ' . ($options['glue'] ?? '+') . ' ';
@@ -185,6 +193,11 @@ class LandingpagesOptions extends AbstractOptions
         $item1 = array_shift($combine);
         $item2 = array_shift($combine);
 
+        if ($this->isAlreadyCombined($item1, $item2)) {
+            array_unshift($combine, $item1);
+            return $this->combine($combine, $options);
+        }
+
         switch (true) {
             case $item1 instanceof Category && $item2 instanceof Category:
                 $result = new Category(
@@ -194,23 +207,23 @@ class LandingpagesOptions extends AbstractOptions
 
                 foreach ($item1->getCategories() as $category1) {
                     foreach ($item2->getCategories() as $category2) {
-                        $merged = self::combine([$category1, $category2], $options);
-                        self::addItem($result, $merged);
+                        $merged = $this->combine([$category1, $category2], $options);
+                        $this->addItem($result, $merged);
                     }
                     foreach ($item2->getLandingpages() as $landingpage2) {
-                        $merged = self::combine([$category1, $landingpage2], $options);
-                        self::addItem($result, $merged);
+                        $merged = $this->combine([$category1, $landingpage2], $options);
+                        $this->addItem($result, $merged);
                     }
                 }
 
                 foreach ($item1->getLandingpages() as $landingpage1) {
                     foreach ($item2->getCategories() as $category2) {
-                        $merged = self::combine([$landingpage1, $category2], $options);
-                        self::addItem($result, $merged);
+                        $merged = $this->combine([$landingpage1, $category2], $options);
+                        $this->addItem($result, $merged);
                     }
                     foreach ($item2->getLandingpages() as $landingpage2) {
-                        $merged = self::combine([$landingpage1, $landingpage2], $options);
-                        self::addItem($result, $merged);
+                        $merged = $this->combine([$landingpage1, $landingpage2], $options);
+                        $this->addItem($result, $merged);
                     }
                 }
                 break;
@@ -222,12 +235,12 @@ class LandingpagesOptions extends AbstractOptions
                 );
 
                 foreach ($item1->getCategories() as $category1) {
-                    $merged = self::combine([$category1, $item2], $options);
-                    self::addItem($result, $merged);
+                    $merged = $this->combine([$category1, $item2], $options);
+                    $this->addItem($result, $merged);
                 }
                 foreach ($item1->getLandingpages() as $landingpage1) {
-                    $merged = self::combine([$landingpage1, $item2], $options);
-                    self::addItem($result, $merged);
+                    $merged = $this->combine([$landingpage1, $item2], $options);
+                    $this->addItem($result, $merged);
                 }
 
                 break;
@@ -239,12 +252,12 @@ class LandingpagesOptions extends AbstractOptions
                 );
 
                 foreach ($item2->getCategories() as $category2) {
-                    $merged = self::combine([$item1, $category2], $options);
-                    self::addItem($result, $merged);
+                    $merged = $this->combine([$item1, $category2], $options);
+                    $this->addItem($result, $merged);
                 }
                 foreach ($item2->getLandingpages() as $landingpage2) {
-                    $merged = self::combine([$item1, $landingpage2], $options);
-                    self::addItem($result, $merged);
+                    $merged = $this->combine([$item1, $landingpage2], $options);
+                    $this->addItem($result, $merged);
                 }
                 break;
 
@@ -271,6 +284,6 @@ class LandingpagesOptions extends AbstractOptions
         }
 
         array_unshift($combine, $result);
-        return self::combine($combine, $options);
+        return $this->combine($combine, $options);
     }
 }
