@@ -24,6 +24,11 @@ class Landingpage extends AbstractItem
     private $query = [];
     private $params = [];
 
+    /**
+     * @var Category
+     */
+    private $category;
+
     public function __construct(string $slug, array $options = [])
     {
         $this->setQuery($options['query'] ?? []);
@@ -62,5 +67,25 @@ class Landingpage extends AbstractItem
     public function setParams(array $params): void
     {
         $this->params = $params;
+    }
+
+    /**
+     * Get category
+     *
+     * @return Category
+     */
+    public function getCategory(): Category
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set category
+     *
+     * @param Category $category
+     */
+    public function setCategory(Category $category): void
+    {
+        $this->category = $category;
     }
 }

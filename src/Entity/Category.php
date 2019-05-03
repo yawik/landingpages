@@ -33,6 +33,7 @@ class Category extends AbstractItem
 
     public function addLandingpage(Landingpage $page): void
     {
+        $page->setCategory($this);
         $this->landingpages[$page->getSlug()] = $page;
     }
 
@@ -42,17 +43,19 @@ class Category extends AbstractItem
     }
 
     /**
-     * @return mixed
+     * getParent
+     *
+     * @return Category
      */
-    public function getParent()
+    public function getParent(): Category
     {
         return $this->parent;
     }
 
     /**
-     * @param mixed $parent
+     * @param Category $parent
      */
-    public function setParent($parent)
+    public function setParent(Category $parent): void
     {
         $this->parent = $parent;
     }
