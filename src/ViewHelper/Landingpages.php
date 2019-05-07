@@ -43,19 +43,17 @@ class Landingpages extends AbstractHelper
             $glue = $slug['glue'] ?? '+';
             unset($slug['glue']);
 
-            $item = $this->landingpages->combine($slug, ['glue' => $glue]);
-
-            if ($item instanceof Landingpage) {
-                $category = new Category('__combined__');
-                $category->addLandingpage($item);
-            } else {
-                $category = $item;
-            }
-        } else {
-            /** @var Category|string $slug */
-            $category = $slug instanceof Category ? $slug : $this->landingpages->getCategory($slug);
+            $slug = $this->landingpages->combine($slug, ['glue' => $glue]);
         }
 
+        if ($slug instanceof Landingpage) {
+            $category = new Category('__combined__');
+            $category->addLandingpage($slug);
+            $slug = $category;
+        }
+
+        /** @var Category|string $slug */
+        $category           = $slug instanceof Category ? $slug : $this->landingpages->getCategory($slug);
         $values['category'] = $category;
 
         return $this->getView()->render($partial, $values);
