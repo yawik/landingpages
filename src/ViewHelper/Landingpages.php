@@ -14,7 +14,7 @@ namespace Landingpages\ViewHelper;
 use Landingpages\Entity\Category;
 use Landingpages\Entity\Landingpage;
 use Landingpages\Options\LandingpagesOptions;
-use Zend\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHelper;
 
 /**
  *

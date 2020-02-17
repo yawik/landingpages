@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace Landingpages;
 
 use Core\ModuleManager\ModuleConfigLoader;
-use Zend\ModuleManager\Feature\BootstrapListenerInterface;
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\Mvc\MvcEvent;
+use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\Mvc\MvcEvent;
 
 /**
  *
@@ -33,7 +33,7 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface
     /**
      * @inheritDoc
      */
-    public function onBootstrap(\Zend\EventManager\EventInterface $e)
+    public function onBootstrap(\Laminas\EventManager\EventInterface $e)
     {
         /** @var MvcEvent $e */
         $services = $e->getApplication()->getServiceManager();
