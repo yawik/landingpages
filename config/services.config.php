@@ -28,7 +28,7 @@ return [
     'view_helpers' => [
         'factories' => [
             ViewHelper\Landingpages::class => ViewHelper\LandingpagesFactory::class,
-            ViewHelper\Landingpage::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
+            ViewHelper\Landingpage::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
         ],
         'aliases' => [
             'landingpages' => ViewHelper\Landingpages::class,

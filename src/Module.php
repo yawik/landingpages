@@ -12,17 +12,23 @@ declare(strict_types=1);
 namespace Landingpages;
 
 use Core\ModuleManager\ModuleConfigLoader;
-use Zend\ModuleManager\Feature\BootstrapListenerInterface;
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\Mvc\MvcEvent;
+use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Core\ModuleManager\Feature\VersionProviderInterface;
+use Core\ModuleManager\Feature\VersionProviderTrait;
+use Laminas\Mvc\MvcEvent;
 
 /**
  *
  * @author Mathias Gelhausen <gelhausen@cross-solution.de>
  * @todo write tests
  */
-class Module implements ConfigProviderInterface, BootstrapListenerInterface
+class Module implements ConfigProviderInterface, BootstrapListenerInterface, VersionProviderInterface
 {
+    use VersionProviderTrait;
+
+    const VERSION = '0.2.0';
+
     const VIEW_DIR = __DIR__ . '/../view';
 
     public function getConfig()
@@ -33,7 +39,7 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface
     /**
      * @inheritDoc
      */
-    public function onBootstrap(\Zend\EventManager\EventInterface $e)
+    public function onBootstrap(\Laminas\EventManager\EventInterface $e)
     {
         /** @var MvcEvent $e */
         $services = $e->getApplication()->getServiceManager();

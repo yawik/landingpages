@@ -14,7 +14,7 @@ namespace Landingpages\Options;
 use Landingpages\Entity\Category;
 use Landingpages\Entity\CombinedItem;
 use Landingpages\Entity\Landingpage;
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
  *

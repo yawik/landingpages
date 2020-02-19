@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Landingpages\Entity;
 
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 /**
  *

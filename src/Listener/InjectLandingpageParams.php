@@ -17,9 +17,9 @@ use Landingpages\Controller\CategoryController;
 use Landingpages\Entity\Category;
 
 use Landingpages\Options\LandingpagesOptions;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Mvc\MvcEvent;
-use Zend\Stdlib\Parameters;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Stdlib\Parameters;
 
 /**
  *

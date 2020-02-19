@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Landingpages\ViewHelper;
 
-use Zend\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHelper;
 
 /**
  *

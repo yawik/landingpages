@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace Landingpages\Controller;
 
 use Landingpages\Options\LandingpagesOptions;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 
 /**
  *
