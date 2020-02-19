@@ -14,6 +14,8 @@ namespace Landingpages;
 use Core\ModuleManager\ModuleConfigLoader;
 use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Core\ModuleManager\Feature\VersionProviderInterface;
+use Core\ModuleManager\Feature\VersionProviderTrait;
 use Laminas\Mvc\MvcEvent;
 
 /**
@@ -21,8 +23,12 @@ use Laminas\Mvc\MvcEvent;
  * @author Mathias Gelhausen <gelhausen@cross-solution.de>
  * @todo write tests
  */
-class Module implements ConfigProviderInterface, BootstrapListenerInterface
+class Module implements ConfigProviderInterface, BootstrapListenerInterface, VersionProviderInterface
 {
+    use VersionProviderTrait;
+
+    const VERSION = '0.2.0';
+
     const VIEW_DIR = __DIR__ . '/../view';
 
     public function getConfig()
