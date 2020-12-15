@@ -1,6 +1,7 @@
 {
   "name": "yawik-landingpages",
-  "version": "0.2.0",
+  "license": "MIT",
+  "repository": "https://github.com/yawik/landingpages.git",
   "scripts": {
     "postinstall": "grunt"
   },

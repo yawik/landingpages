@@ -27,7 +27,7 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface, Ver
 {
     use VersionProviderTrait;
 
-    const VERSION = '0.2.0';
+    const VERSION = '0.3.0';
 
     const VIEW_DIR = __DIR__ . '/../view';
 
